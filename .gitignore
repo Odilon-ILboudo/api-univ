@@ -1,0 +1,29 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+lib/
+build/
+
+# Env files
+.env
+.env.*.local
+
+# Vercel
+.vercel/
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Optional: IDE settings
+.vscode/
+.idea/
