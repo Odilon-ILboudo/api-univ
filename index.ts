@@ -31,6 +31,9 @@ exports.api = functions.https.onRequest(app);
 **/
 
 
+
+
+/*
 import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -66,3 +69,38 @@ app.use("/api/grades", gradesRoutes);
 export default (req: Request, res: Response) => {
   app(req, res);
 };
+*/
+
+
+
+// src/index.ts
+import express, { Request, Response } from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+
+import admin from "./firebaseAdmin";
+import academicYearRoutes from "./routes/academicYear";
+import gradesRoutes from "./routes/grades";
+import classCourseRoutes from "./routes/classCourseRoutes";
+import courseRouter from "./routes/courses";
+import professorsRouter from "./routes/createProfessor";
+import studentRoutes from "./routes/createStudentAccount";
+
+dotenv.config();
+
+if (!admin.apps.length) admin.initializeApp();
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// Routes
+app.use("/api/academic-year", academicYearRoutes);
+app.use("/api/class-courses", classCourseRoutes);
+app.use("/api/courses", courseRouter);
+app.use("/api/professors", professorsRouter);
+app.use("/api/students", studentRoutes);
+app.use("/api/grades", gradesRoutes);
+
+// Exporter pour Vercel Serverless
+export default app;
