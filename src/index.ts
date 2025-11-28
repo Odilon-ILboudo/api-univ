@@ -121,6 +121,9 @@ import classCourseRoutes from "./routes/classCourseRoutes";
 import courseRouter from "./routes/courses";
 import professorsRouter from "./routes/createProfessor";
 import studentRoutes from "./routes/createStudentAccount";
+import departmentsRoutes from "./routes/departmentsRoutes";
+import welcomeEmailRoute from "./routes/sendWelcomeEmail";
+import scheduleRoute from "./routes/schedule";
 
 dotenv.config();
 
@@ -134,12 +137,18 @@ app.use(cors());
 app.use(express.json());
 
 // --- API ROUTES ---
-app.use("/api/academic-year", academicYearRoutes);
-app.use("/api/class-courses", classCourseRoutes);
-app.use("/api/courses", courseRouter);
-app.use("/api/professors", professorsRouter);
+
+//app.use("/api/class-courses", classCourseRoutes);
+
+
+app.use("/api/departments", departmentsRoutes);
 app.use("/api/students", studentRoutes);
+app.use("/api", welcomeEmailRoute);
+app.use("/api/professors", professorsRouter);
+app.use("/api/courses", courseRouter);
+app.use("/api", scheduleRoute); 
 app.use("/api/grades", gradesRoutes);
+app.use("/api/academic-year", academicYearRoutes);
 
 // --- REQUIRED EXPORT FOR VERCEL SERVERLESS ---
 import { VercelRequest, VercelResponse } from "@vercel/node";
