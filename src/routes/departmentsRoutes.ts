@@ -28,7 +28,7 @@ export interface Department {
 /* -----------------------------------
    GET ALL : departments > fields > levels
 ------------------------------------ */
-router.get("/departments", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const snapshot = await db.collection("departments").orderBy("name").get();
 
@@ -92,7 +92,7 @@ router.get("/departments", async (req, res) => {
    DEPARTMENTS CRUD
 ------------------------------------ */
 // CREATE department
-router.post("/departments", async (req, res) => {
+router.post("/", async (req, res) => {
   const { name } = req.body;
   if (!name) return res.status(400).json({ error: "name requis" });
 
@@ -109,7 +109,7 @@ router.post("/departments", async (req, res) => {
 });
 
 // UPDATE department
-router.put("/departments/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
 
@@ -123,7 +123,7 @@ router.put("/departments/:id", async (req, res) => {
 });
 
 // DELETE department + children
-router.delete("/departments/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -149,13 +149,13 @@ router.delete("/departments/:id", async (req, res) => {
 /* -----------------------------------
    FIELDS CRUD
 ------------------------------------ */
-router.post("/departments/:deptId/fields", async (req, res) => {
+router.post("/:deptId/fields", async (req, res) => {
   const { name } = req.body;
   const { deptId } = req.params;
 
   try {
     const ref = await db
-      .collection("departments")
+      .collection("departments") 
       .doc(deptId)
       .collection("fields")
       .add({
@@ -169,7 +169,7 @@ router.post("/departments/:deptId/fields", async (req, res) => {
   }
 });
 
-router.put("/departments/:deptId/fields/:fieldId", async (req, res) => {
+router.put("/:deptId/fields/:fieldId", async (req, res) => {
   const { deptId, fieldId } = req.params;
   const { name } = req.body;
 
@@ -182,7 +182,7 @@ router.put("/departments/:deptId/fields/:fieldId", async (req, res) => {
   }
 });
 
-router.delete("/departments/:deptId/fields/:fieldId", async (req, res) => {
+router.delete("/:deptId/fields/:fieldId", async (req, res) => {
   const { deptId, fieldId } = req.params;
 
   try {
@@ -202,7 +202,7 @@ router.delete("/departments/:deptId/fields/:fieldId", async (req, res) => {
 /* -----------------------------------
    LEVELS CRUD
 ------------------------------------ */
-router.post("/departments/:deptId/fields/:fieldId/levels", async (req, res) => {
+router.post("/:deptId/fields/:fieldId/levels", async (req, res) => {
   const { name } = req.body;
   const { deptId, fieldId } = req.params;
 
@@ -218,7 +218,7 @@ router.post("/departments/:deptId/fields/:fieldId/levels", async (req, res) => {
   }
 });
 
-router.put("/departments/:deptId/fields/:fieldId/levels/:levelId", async (req, res) => {
+router.put("/:deptId/fields/:fieldId/levels/:levelId", async (req, res) => {
   const { name } = req.body;
   const { deptId, fieldId, levelId } = req.params;
 
@@ -231,7 +231,7 @@ router.put("/departments/:deptId/fields/:fieldId/levels/:levelId", async (req, r
   }
 });
 
-router.delete("/departments/:deptId/fields/:fieldId/levels/:levelId", async (req, res) => {
+router.delete("/:deptId/fields/:fieldId/levels/:levelId", async (req, res) => {
   const { deptId, fieldId, levelId } = req.params;
 
   try {

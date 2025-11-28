@@ -20,7 +20,7 @@ router.post("/schedule", async (req, res) => {
     console.error(err);
     return res.status(500).json({ error: "Update failed" });
   }
-});
+}); 
 
 // Récupérer planning d'un cours
 router.get("/schedule", async (req, res) => {

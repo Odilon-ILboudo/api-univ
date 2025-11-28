@@ -141,7 +141,7 @@ app.use(express.json());
 //app.use("/api/class-courses", classCourseRoutes);
 
 
-app.use("/api/departments", departmentsRoutes);
+app.use("/api", departmentsRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api", welcomeEmailRoute);
 app.use("/api/professors", professorsRouter);
