@@ -2,7 +2,7 @@
 import express from "express";
 import { Resend } from "resend";
 import dotenv from "dotenv";
-import admin from "../../firebaseAdmin";
+import admin from "../firebaseAdmin";
 
 dotenv.config();
 

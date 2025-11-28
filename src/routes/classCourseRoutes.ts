@@ -1,6 +1,6 @@
 // api/classCourseRoutes.ts
 import express from "express";
-import admin from "../../firebaseAdmin";
+import admin from "../firebaseAdmin";
 
 const router = express.Router();
 const db = admin.firestore();
