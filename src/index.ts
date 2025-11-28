@@ -72,19 +72,19 @@ export default (req: Request, res: Response) => {
 */
 
 
-
+/*
 // src/index.ts
 import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 
 import admin from "./firebaseAdmin";
-import academicYearRoutes from "./routes/academicYear";
-import gradesRoutes from "./routes/grades";
-import classCourseRoutes from "./routes/classCourseRoutes";
-import courseRouter from "./routes/courses";
-import professorsRouter from "./routes/createProfessor";
-import studentRoutes from "./routes/createStudentAccount";
+import academicYearRoutes from "./src/routes/academicYear";
+import gradesRoutes from "./src/routes/grades";
+import classCourseRoutes from "./src/routes/classCourseRoutes";
+import courseRouter from "./src/routes/courses";
+import professorsRouter from "./src/routes/createProfessor";
+import studentRoutes from "./src/routes/createStudentAccount";
 
 dotenv.config();
 
@@ -104,3 +104,46 @@ app.use("/api/grades", gradesRoutes);
 
 // Exporter pour Vercel Serverless
 export default app;
+*/
+
+
+
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+
+import admin from "./firebaseAdmin";
+
+// Routes
+import academicYearRoutes from "./routes/academicYear";
+import gradesRoutes from "./routes/grades";
+import classCourseRoutes from "./routes/classCourseRoutes";
+import courseRouter from "./routes/courses";
+import professorsRouter from "./routes/createProfessor";
+import studentRoutes from "./routes/createStudentAccount";
+
+dotenv.config();
+
+// Initialize Firebase Admin if not already initialized
+if (!admin.apps.length) {
+  admin.initializeApp();
+}
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// --- API ROUTES ---
+app.use("/api/academic-year", academicYearRoutes);
+app.use("/api/class-courses", classCourseRoutes);
+app.use("/api/courses", courseRouter);
+app.use("/api/professors", professorsRouter);
+app.use("/api/students", studentRoutes);
+app.use("/api/grades", gradesRoutes);
+
+// --- REQUIRED EXPORT FOR VERCEL SERVERLESS ---
+import { VercelRequest, VercelResponse } from "@vercel/node";
+
+export default (req: VercelRequest, res: VercelResponse) => {
+  app(req as any, res as any);
+};

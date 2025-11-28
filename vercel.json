@@ -3,11 +3,13 @@
   "builds": [
     {
       "src": "src/index.ts",
-      "use": "@vercel/node",
-      "config": { "tsconfig": "tsconfig.json" }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/src/index.ts" }
+    {
+      "src": "/(.*)",
+      "dest": "/src/index.ts"
+    }
   ]
 }

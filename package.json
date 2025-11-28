@@ -2,7 +2,6 @@
   "name": "api-functions",
   "version": "1.0.0",
   "description": "Backend Express + Firebase",
-  "main": "dist/server.js",
   "type": "commonjs",
   "scripts": {
     "build": "tsc",
@@ -13,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vercel/node": "^5.5.13",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
